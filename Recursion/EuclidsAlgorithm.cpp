@@ -1,13 +1,13 @@
-#include <iostream>
-#include <vector>
-using namespace std;
+// #include <iostream>
+// #include <vector>
+// using namespace std;
 
 // int GCD(int p, int q)
 // {
 
 //     if (p > q)
 //     {
-//         return GCD(q, p/(p % q));
+//         return GCD(q, p % q);
 //     }
 //     if (q == 0)
 //         return p;
@@ -21,4 +21,3 @@ using namespace std;
 
 //     return 0;
 // }
-broken
