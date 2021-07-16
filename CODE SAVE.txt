@@ -1,0 +1,60 @@
+
+#include <iostream>
+using namespace std;
+
+int AvoidLastSpaces(string markdown){
+  int Lindex = markdown.size()-1;
+  while(markdown.at(Lindex)== ' ')
+  Lindex--;
+  return Lindex;
+}
+int AvoidSpaces(int i, string markdown){
+  while (markdown.at(i) == ' ')
+    i++;
+  return i;
+}
+
+string getmarkdown(int index, string markdown, int Lindex){
+  string header;
+  int tick=0;
+    while (index != Lindex+1){
+      // figure out if the '*' closes. 
+      if(markdown.at(index)== '*'){
+        if(tick <1){
+        header += "<strong>";
+        tick++;
+        }
+        else {header +="</strong>";
+        tick=0;}
+        index+=2;
+        continue;
+      }
+    header += markdown.at(index);
+    index++;
+  }
+  return header;
+}
+int countTags(int i, string markdown){
+  int tags = i;
+  while (tags < tags + 7){
+    if (markdown.at(tags) != '#')
+      break;
+    tags++;
+  }
+  
+  return tags-i;
+}
+bool isValid(int i, string markdown, int numHTags){
+  return (markdown.at(i)== ' ')?(numHTags>=7)?false:true:false;
+}
+
+std::string markdownparser(std::string markdown)
+{
+ int index= AvoidSpaces(0,markdown), 
+ numHTags = countTags(index,markdown), 
+ Lindex = AvoidLastSpaces(markdown);
+  
+if(isValid(index+numHTags, markdown, numHTags))
+   return "<h" + to_string(numHTags) + ">" + getmarkdown(AvoidSpaces(index+numHTags,markdown), markdown, Lindex) + "</h" + to_string(numHTags) + ">";
+else return getmarkdown(index,markdown, Lindex);
+}

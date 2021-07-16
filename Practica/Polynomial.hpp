@@ -8,6 +8,7 @@ public:
     Polynomial(double, double);
     double getCoeficient();
     double getExponent();
+    
     std::string ToString();
     double evaluateAt(int);
     Polynomial getDerivative();
